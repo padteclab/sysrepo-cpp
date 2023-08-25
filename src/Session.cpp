@@ -203,6 +203,19 @@ std::optional<libyang::DataNode> Session::getData(const std::string& path) const
     return wrapSrData(m_sess, data);
 }
 
+std::optional<libyang::DataNode> Session::getDataSubtree(const std::string& path) const
+{
+    sr_data_t* data;
+    auto res = sr_get_subtree(m_sess.get(), path.c_str(), 0, &data);
+
+    throwIfError(res, "Session::getDataSubtree: Couldn't get '"s + path + "'", m_sess.get());
+    if (!data) {
+        return std::nullopt;
+    }
+
+    return wrapSrData(m_sess, data);
+}
+
 /**
  * @brief Returns a single value matching the provided XPath.
  *

@@ -17,9 +17,10 @@ It uses RAII for automatic memory management.
 
 ## Building
 *sysrepo-cpp* uses *CMake* for building. The standard way of building *sysrepo-cpp* looks like this:
-```
+```bash
 mkdir build
 cd build
+# cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DBUILD_TESTING=OFF -DWITH_DOCS=OFF ..
 cmake ..
 make
 make install
